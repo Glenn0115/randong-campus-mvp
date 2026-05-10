@@ -1,0 +1,52 @@
+<view class="page onboarding-page">
+  <view class="section intro">
+    <view class="title">创建你的运动角色</view>
+    <view class="muted">用 1 分钟设置偏好，系统会生成今日任务。</view>
+  </view>
+
+  <view class="section card">
+    <view class="subtitle">角色名称</view>
+    <input class="input form-control" value="{{roleName}}" maxlength="12" placeholder="2-12 字，例如：操场新星" bindinput="onRoleNameInput" />
+  </view>
+
+  <view class="section card">
+    <view class="subtitle">运动目标</view>
+    <view class="option-grid">
+      <view wx:for="{{goalOptions}}" wx:key="value" class="option {{selectedGoal === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="chooseGoal">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="row">
+      <view class="subtitle">运动偏好</view>
+      <text class="muted">最多 3 项</text>
+    </view>
+    <view class="option-grid">
+      <view wx:for="{{sportOptions}}" wx:key="value" class="option {{selectedSportsMap[item.value] ? 'active' : ''}}" data-value="{{item.value}}" bindtap="toggleSport">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="subtitle">每周运动频率</view>
+    <view class="option-grid">
+      <view wx:for="{{frequencyOptions}}" wx:key="value" class="option {{selectedFrequency === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="chooseFrequency">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="subtitle">当前运动基础</view>
+    <view class="option-grid">
+      <view wx:for="{{fitnessOptions}}" wx:key="value" class="option {{selectedFitness === item.value ? 'active' : ''}}" data-value="{{item.value}}" bindtap="chooseFitness">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <button class="primary-button submit-button" bindtap="submit">生成今日任务</button>
+</view>

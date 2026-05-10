@@ -1,0 +1,24 @@
+<view class="page leaderboard-page">
+  <view class="section card">
+    <view class="title">多维排行榜</view>
+    <view class="muted">不只看运动量，也看坚持、进步和小队贡献。</view>
+  </view>
+
+  <view class="section tab-row">
+    <view wx:for="{{tabs}}" wx:key="key" class="tab {{activeTab === item.key ? 'active' : ''}}" data-key="{{item.key}}" bindtap="switchTab">{{item.label}}</view>
+  </view>
+
+  <view class="section list">
+    <view class="card rank-card" wx:for="{{entries}}" wx:key="record_id">
+      <view class="rank-index">{{item.rank}}</view>
+      <view class="rank-main">
+        <view class="rank-name">{{item.name}}</view>
+        <view class="muted">{{item.title}}</view>
+      </view>
+      <view class="rank-side">
+        <view class="metric">{{item.metric}}</view>
+        <button class="danger-button report-button" data-record-id="{{item.record_id}}" data-record-type="{{item.record_type}}" bindtap="report">举报</button>
+      </view>
+    </view>
+  </view>
+</view>

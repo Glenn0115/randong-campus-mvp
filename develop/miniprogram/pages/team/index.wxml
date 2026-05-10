@@ -1,0 +1,72 @@
+<view class="page team-page">
+  <view wx:if="{{!team}}" class="section card no-team">
+    <view class="title">还没有小队</view>
+    <view class="muted">创建宿舍队、好友队，或者用口令加入现有小队。</view>
+  </view>
+
+  <view wx:if="{{!team}}" class="section card">
+    <view class="subtitle">创建小队</view>
+    <input class="input field" value="{{teamName}}" maxlength="12" placeholder="小队名称，2-12 字" bindinput="onTeamNameInput" />
+    <picker range="{{teamTypes}}" bindchange="onTeamTypeChange">
+      <view class="input field">{{teamType || '选择小队类型'}}</view>
+    </picker>
+    <input class="input field" value="{{slogan}}" maxlength="30" placeholder="小队宣言（可选）" bindinput="onSloganInput" />
+    <button class="primary-button" bindtap="createTeam">创建小队</button>
+  </view>
+
+  <view wx:if="{{!team}}" class="section card">
+    <view class="subtitle">加入小队</view>
+    <view class="muted sample-code">示例口令：RUN2026</view>
+    <input class="input field" value="{{inviteCode}}" maxlength="12" placeholder="输入小队口令" bindinput="onInviteCodeInput" />
+    <button class="secondary-button" bindtap="joinTeam">加入小队</button>
+  </view>
+
+  <view wx:if="{{team}}" class="section card">
+    <view class="row">
+      <view>
+        <view class="title">{{team.team_name}}</view>
+        <view class="muted">{{team.team_type}} · {{team.slogan || '一起完成运动目标'}}</view>
+      </view>
+      <text class="badge" wx:if="{{isCaptain}}">队长</text>
+    </view>
+    <view class="team-code">口令 {{team.invite_code}}</view>
+    <view class="progress">
+      <view class="progress-bar" style="width: {{teamPercent}}%;"></view>
+    </view>
+    <view class="muted progress-text">本周 {{team.weekly_minutes}} / {{team.weekly_target}} 分钟</view>
+  </view>
+
+  <view wx:if="{{team}}" class="section card">
+    <view class="row">
+      <view class="subtitle">成员</view>
+      <text class="muted">{{team.members.length}} / 8</text>
+    </view>
+    <view class="member-list">
+      <view class="member" wx:for="{{team.members}}" wx:key="user_id">
+        <view class="avatar">{{item.initial}}</view>
+        <view>
+          <view class="member-name">{{item.nickname}}</view>
+          <view class="muted">{{item.title}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{team}}" class="section card">
+    <view class="row">
+      <view>
+        <view class="subtitle">小队约练</view>
+        <view class="muted">只约时间和运动类型</view>
+      </view>
+      <button class="ghost-button invite-button" bindtap="goInvite">发起</button>
+    </view>
+    <view class="invite-list" wx:if="{{teamInvites.length > 0}}">
+      <view class="invite-item" wx:for="{{teamInvites}}" wx:key="invite_id">
+        <text>{{item.sport_label}}</text>
+        <text class="muted">{{item.workout_time}}</text>
+        <text class="badge">{{item.responder_count}} 人响应</text>
+      </view>
+    </view>
+    <view class="muted empty-line" wx:else>暂无约练时间卡。</view>
+  </view>
+</view>

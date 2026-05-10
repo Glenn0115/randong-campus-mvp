@@ -1,0 +1,44 @@
+.field {
+  margin-bottom: 24rpx;
+}
+
+.label {
+  margin-bottom: 12rpx;
+  color: #334155;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.picker-value {
+  display: flex;
+  align-items: center;
+}
+
+.group-title {
+  margin-bottom: 16rpx;
+}
+
+.invite-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.invite-title {
+  margin-bottom: 6rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.note {
+  padding: 16rpx;
+  border-radius: 10rpx;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 26rpx;
+}
+
+.respond-button {
+  width: 156rpx;
+  flex-shrink: 0;
+}

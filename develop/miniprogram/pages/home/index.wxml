@@ -1,0 +1,60 @@
+<view class="page home-page" wx:if="{{ready}}">
+  <view class="section hero card">
+    <view class="row">
+      <view>
+        <view class="muted">今天也让身体上线</view>
+        <view class="title">{{user.role_name || user.nickname}}</view>
+      </view>
+      <button class="profile-button" bindtap="goProfile">我的</button>
+    </view>
+    <view class="level-row">
+      <text class="badge">Lv.{{user.level}}</text>
+      <text class="muted">{{user.display_title || '新手上路'}}</text>
+      <text class="muted">连续 {{user.streak_days}} 天</text>
+    </view>
+    <view class="progress">
+      <view class="progress-bar" style="width: {{expPercent}}%;"></view>
+    </view>
+  </view>
+
+  <view class="section row action-row">
+    <button class="primary-button action-button" bindtap="quickCheckin">快捷打卡</button>
+    <button class="secondary-button action-button" bindtap="goInvite">发布约练</button>
+  </view>
+
+  <view class="section">
+    <view class="row section-head">
+      <view class="subtitle">今日任务</view>
+      <text class="muted" bindtap="goTasks">查看全部</text>
+    </view>
+    <view class="list">
+      <view wx:for="{{todayTasks}}" wx:key="task_id" class="card task-card">
+        <view class="row">
+          <view>
+            <view class="task-title">{{item.title}}</view>
+            <view class="muted">{{item.description}}</view>
+          </view>
+          <text class="badge">{{item.status_label}}</text>
+        </view>
+        <view class="task-meta">
+          <text>{{item.target_value}}{{item.target_unit}}</text>
+          <text>{{item.exp_reward}} EXP</text>
+        </view>
+        <button class="ghost-button" data-task-id="{{item.task_id}}" bindtap="goCheckin">提交打卡</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="section card" wx:if="{{team}}">
+    <view class="row">
+      <view>
+        <view class="subtitle">{{team.team_name}}</view>
+        <view class="muted">本周累计 {{team.weekly_minutes}} / {{team.weekly_target}} 分钟</view>
+      </view>
+      <text class="badge">小队</text>
+    </view>
+    <view class="progress team-progress">
+      <view class="progress-bar" style="width: {{teamPercent}}%;"></view>
+    </view>
+  </view>
+</view>

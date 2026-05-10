@@ -1,0 +1,35 @@
+<view class="page tasks-page">
+  <view class="section card">
+    <view class="row">
+      <view>
+        <view class="title">今日任务</view>
+        <view class="muted">剩余调整次数 {{remainingAdjustments}} / 2</view>
+      </view>
+      <text class="badge">自动保连续</text>
+    </view>
+  </view>
+
+  <view class="section" wx:for="{{groups}}" wx:key="type">
+    <view class="subtitle group-title">{{item.label}}</view>
+    <view class="list">
+      <view wx:for="{{item.tasks}}" wx:for-item="task" wx:key="task_id" class="card task-card">
+        <view class="row">
+          <view>
+            <view class="task-title">{{task.title}}</view>
+            <view class="muted">{{task.description}}</view>
+          </view>
+          <text class="badge">{{task.status_label}}</text>
+        </view>
+        <view class="task-meta">
+          <text>{{task.target_value}}{{task.target_unit}}</text>
+          <text>{{task.exp_reward}} EXP</text>
+        </view>
+        <view class="row button-row">
+          <button class="secondary-button small-button" data-task-id="{{task.task_id}}" bindtap="goCheckin" disabled="{{task.status === 'completed' || task.status === 'adjusted'}}">提交打卡</button>
+          <button class="ghost-button small-button" data-task-id="{{task.task_id}}" bindtap="startTask" disabled="{{task.status !== 'not_started'}}">开始</button>
+          <button class="ghost-button small-button" data-task-id="{{task.task_id}}" bindtap="adjustTask" disabled="{{!task.can_adjust}}">调整</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

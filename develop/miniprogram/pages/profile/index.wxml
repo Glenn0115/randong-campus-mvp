@@ -1,0 +1,67 @@
+<view class="page profile-page">
+  <view class="section card">
+    <view class="title">{{user.role_name || user.nickname}}</view>
+    <view class="muted">{{user.main_route || '综合路线'}} · {{user.display_title || '新手上路'}}</view>
+  </view>
+
+  <view class="section card">
+    <view class="subtitle">隐私设置</view>
+    <view class="row setting-row">
+      <view>
+        <view class="setting-title">排行榜匿名展示</view>
+        <view class="muted">开启后榜单显示“匿名用户”</view>
+      </view>
+      <switch checked="{{anonymousLeaderboard}}" bindchange="toggleAnonymous" />
+    </view>
+    <view class="row setting-row">
+      <view>
+        <view class="setting-title">公开详细运动数据</view>
+        <view class="muted">默认关闭，只展示完成状态</view>
+      </view>
+      <switch checked="{{shareDetails}}" bindchange="toggleShareDetails" />
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="subtitle">可选佐证</view>
+    <view class="row setting-row">
+      <view>
+        <view class="setting-title">图片佐证</view>
+        <view class="muted">MVP 阶段仅保存开关</view>
+      </view>
+      <switch checked="{{proof.image_enabled}}" bindchange="toggleImageProof" />
+    </view>
+    <view class="row setting-row">
+      <view>
+        <view class="setting-title">定位佐证</view>
+        <view class="muted">默认仅自己可见</view>
+      </view>
+      <switch checked="{{proof.location_enabled}}" bindchange="toggleLocationProof" />
+    </view>
+    <view class="row setting-row">
+      <view>
+        <view class="setting-title">健康数据</view>
+        <view class="muted">可选授权，不影响手动打卡</view>
+      </view>
+      <switch checked="{{proof.health_data_enabled}}" bindchange="toggleHealthProof" />
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="row">
+      <view>
+        <view class="subtitle">举报记录</view>
+        <view class="muted">{{reports.length}} 条记录</view>
+      </view>
+    </view>
+    <view class="report-list" wx:if="{{reports.length > 0}}">
+      <view class="report-item" wx:for="{{reports}}" wx:key="report_id">
+        <text>{{item.reason}}</text>
+        <text class="badge">{{item.status}}</text>
+      </view>
+    </view>
+    <view class="muted empty-line" wx:else>暂无举报记录。</view>
+  </view>
+
+  <button class="ghost-button" bindtap="resetDemo">重置演示数据</button>
+</view>

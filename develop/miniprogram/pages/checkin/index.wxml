@@ -1,0 +1,61 @@
+<view class="page checkin-page">
+  <view class="section card" wx:if="{{task}}">
+    <view class="subtitle">{{task.title}}</view>
+    <view class="muted">{{task.description}}</view>
+  </view>
+
+  <view class="section card">
+    <view class="field">
+      <view class="label">运动类型</view>
+      <picker range="{{sportOptions}}" range-key="label" bindchange="onSportChange">
+        <view class="input picker-value">{{sportLabel || '请选择运动类型'}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <view class="label">运动时长（分钟）</view>
+      <input class="input" type="number" value="{{duration}}" placeholder="例如 20" bindinput="onDurationInput" />
+    </view>
+
+    <view class="field">
+      <view class="label">公里数（可选）</view>
+      <input class="input" type="digit" value="{{distance}}" placeholder="例如 2.5" bindinput="onDistanceInput" />
+    </view>
+
+    <view class="field">
+      <view class="label">步数（可选）</view>
+      <input class="input" type="number" value="{{steps}}" placeholder="例如 3000" bindinput="onStepsInput" />
+    </view>
+
+    <view class="field">
+      <view class="label">运动感受（可选）</view>
+      <textarea class="textarea" value="{{note}}" maxlength="80" placeholder="写一句今天的状态" bindinput="onNoteInput"></textarea>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="row proof-row">
+      <view>
+        <view class="subtitle">图片佐证</view>
+        <view class="muted">MVP 阶段为占位开关</view>
+      </view>
+      <switch checked="{{imageEnabled}}" bindchange="onImageToggle" />
+    </view>
+    <view class="row proof-row">
+      <view>
+        <view class="subtitle">定位佐证</view>
+        <view class="muted">默认不公开</view>
+      </view>
+      <switch checked="{{locationEnabled}}" bindchange="onLocationToggle" />
+    </view>
+    <view class="row proof-row">
+      <view>
+        <view class="subtitle">健康数据</view>
+        <view class="muted">失败不影响手动打卡</view>
+      </view>
+      <switch checked="{{healthEnabled}}" bindchange="onHealthToggle" />
+    </view>
+  </view>
+
+  <button class="primary-button" bindtap="submit">完成打卡</button>
+</view>

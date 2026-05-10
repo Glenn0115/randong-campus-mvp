@@ -1,0 +1,58 @@
+.hero {
+  margin-top: 8rpx;
+}
+
+.profile-button {
+  min-width: 104rpx;
+  height: 64rpx;
+  border: 1rpx solid #dbe4e2;
+  border-radius: 10rpx;
+  background: #ffffff;
+  color: #334155;
+  font-size: 24rpx;
+  line-height: 64rpx;
+}
+
+.level-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin: 22rpx 0 16rpx;
+}
+
+.action-row {
+  align-items: stretch;
+}
+
+.action-button {
+  flex: 1;
+}
+
+.section-head {
+  margin-bottom: 16rpx;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.task-title {
+  margin-bottom: 6rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #10201d;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  color: #64748b;
+  font-size: 24rpx;
+}
+
+.team-progress {
+  margin-top: 18rpx;
+}

@@ -1,0 +1,33 @@
+.group-title {
+  margin: 8rpx 0 16rpx;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.task-title {
+  margin-bottom: 6rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.task-meta {
+  display: flex;
+  gap: 24rpx;
+  color: #64748b;
+  font-size: 24rpx;
+}
+
+.button-row {
+  align-items: stretch;
+}
+
+.small-button {
+  flex: 1;
+  height: 72rpx;
+  font-size: 24rpx;
+  line-height: 72rpx;
+}

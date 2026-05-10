@@ -1,0 +1,53 @@
+<view class="page invite-page">
+  <view class="section card">
+    <view class="title">约练时间卡</view>
+    <view class="muted">MVP 只约时间和运动类型，地点可在备注里自行说明。</view>
+  </view>
+
+  <view class="section card">
+    <view class="field">
+      <view class="label">运动类型</view>
+      <picker range="{{sportOptions}}" range-key="label" bindchange="onSportChange">
+        <view class="input picker-value">{{sportLabel || '请选择运动类型'}}</view>
+      </picker>
+    </view>
+    <view class="field">
+      <view class="label">约练时间</view>
+      <input class="input" value="{{workoutTime}}" placeholder="例如：今晚 20:00" bindinput="onWorkoutTimeInput" />
+    </view>
+    <view class="field">
+      <view class="label">可见范围</view>
+      <picker range="{{visibilityOptions}}" range-key="label" bindchange="onVisibilityChange">
+        <view class="input picker-value">{{visibilityLabel}}</view>
+      </picker>
+    </view>
+    <view class="field">
+      <view class="label">备注</view>
+      <textarea class="textarea" value="{{note}}" maxlength="50" placeholder="最多 50 字" bindinput="onNoteInput"></textarea>
+    </view>
+    <button class="primary-button" bindtap="createInvite">发布约练</button>
+  </view>
+
+  <view class="section">
+    <view class="subtitle group-title">可响应约练</view>
+    <view class="list" wx:if="{{visibleInvites.length > 0}}">
+      <view class="card invite-card" wx:for="{{visibleInvites}}" wx:key="invite_id">
+        <view class="row">
+          <view>
+            <view class="invite-title">{{item.sport_label}}</view>
+            <view class="muted">{{item.workout_time}} · {{item.creator_name}}</view>
+          </view>
+          <text class="badge">{{item.visibility_label}}</text>
+        </view>
+        <view class="note" wx:if="{{item.note}}">{{item.note}}</view>
+        <view class="row">
+          <text class="muted">{{item.responder_count}} 人响应</text>
+          <button class="secondary-button respond-button" data-invite-id="{{item.invite_id}}" bindtap="respond" disabled="{{item.responded}}">{{item.responded ? '已响应' : '我也去'}}</button>
+        </view>
+      </view>
+    </view>
+    <view class="card" wx:else>
+      <view class="muted">暂无公开或小队约练。</view>
+    </view>
+  </view>
+</view>

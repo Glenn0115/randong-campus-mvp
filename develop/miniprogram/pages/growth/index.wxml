@@ -1,0 +1,50 @@
+<view class="page growth-page">
+  <view class="section card">
+    <view class="muted">当前路线</view>
+    <view class="title">{{user.main_route || '综合路线'}}</view>
+    <view class="level-line">
+      <text class="badge">Lv.{{user.level}}</text>
+      <text class="muted">{{user.exp}} EXP</text>
+      <text class="muted">连续 {{user.streak_days}} 天</text>
+    </view>
+    <view class="progress">
+      <view class="progress-bar" style="width: {{expPercent}}%;"></view>
+    </view>
+  </view>
+
+  <view class="section card">
+    <view class="row">
+      <view>
+        <view class="subtitle">当前展示称号</view>
+        <view class="muted">{{user.display_title || '尚未设置'}}</view>
+      </view>
+      <text class="badge">{{unlockedTitles.length}} 已解锁</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="subtitle group-title">已获得称号</view>
+    <view class="list" wx:if="{{unlockedTitles.length > 0}}">
+      <view class="card title-card" wx:for="{{unlockedTitles}}" wx:key="title_id">
+        <view>
+          <view class="title-name">{{item.name}}</view>
+          <view class="muted">{{item.condition}}</view>
+        </view>
+        <button class="ghost-button set-button" data-title-name="{{item.name}}" bindtap="setDisplayTitle">展示</button>
+      </view>
+    </view>
+    <view class="card empty-card" wx:else>
+      <view class="muted">完成首次打卡即可获得第一个称号。</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="subtitle group-title">待解锁称号</view>
+    <view class="list">
+      <view class="card locked-card" wx:for="{{lockedTitles}}" wx:key="title_id">
+        <view class="title-name">{{item.name}}</view>
+        <view class="muted">{{item.condition}}</view>
+      </view>
+    </view>
+  </view>
+</view>

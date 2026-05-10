@@ -1,0 +1,19 @@
+.onboarding-page {
+  padding-bottom: 48rpx;
+}
+
+.intro {
+  padding: 16rpx 0 4rpx;
+}
+
+.form-control {
+  margin-top: 18rpx;
+}
+
+.option-grid {
+  margin-top: 18rpx;
+}
+
+.submit-button {
+  margin-top: 8rpx;
+}

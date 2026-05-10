@@ -1,0 +1,15 @@
+{
+  "description": "燃动校园 MVP",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.6.5",
+  "appid": "touristappid",
+  "projectname": "randong-campus-mvp",
+  "condition": {}
+}
