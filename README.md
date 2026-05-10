@@ -7,9 +7,27 @@
 ```text
 prd/MVP_prd_.md              MVP 产品需求文档
 develop/miniprogram/         微信小程序前端 MVP
+develop/web-demo/            可直接用浏览器运行的 H5 演示版
+index.html                   GitHub Pages / 本地浏览器入口
 ```
 
-## 运行方式
+## 运行方式一：H5 Web Demo
+
+不需要微信开发者工具，直接用浏览器打开：
+
+```text
+develop/web-demo/index.html
+```
+
+也可以打开根目录 `index.html`，它会自动跳转到 H5 演示版。
+
+如果启用 GitHub Pages，并选择 `main` 分支根目录作为发布源，可访问：
+
+```text
+https://glenn0115.github.io/randong-campus-mvp/
+```
+
+## 运行方式二：微信小程序源码
 
 1. 使用微信开发者工具打开 `develop/miniprogram`。
 2. AppID 可使用测试号或游客模式。
@@ -19,6 +37,7 @@ develop/miniprogram/         微信小程序前端 MVP
 
 ```bash
 node develop/miniprogram/tests/domain.test.js
+node develop/web-demo/web-demo.test.js
 ```
 
 ## MVP 功能
