@@ -15,17 +15,19 @@ index.html                   GitHub Pages / 本地浏览器入口
 
 不需要微信开发者工具，直接用浏览器打开：
 
+网页访问：
+已启用 GitHub Pages，并选择 `main` 分支根目录作为发布源，可直接访问：
+
+```text
+https://glenn0115.github.io/randong-campus-mvp/
+```
+
+项目安装到本地时，本地访问：
 ```text
 develop/web-demo/index.html
 ```
 
 也可以打开根目录 `index.html`，它会自动跳转到 H5 演示版。
-
-如果启用 GitHub Pages，并选择 `main` 分支根目录作为发布源，可访问：
-
-```text
-https://glenn0115.github.io/randong-campus-mvp/
-```
 
 ## 运行方式二：微信小程序源码
 
