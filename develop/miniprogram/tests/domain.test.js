@@ -46,17 +46,33 @@ test('creates a basic task and a preference task for an onboarded user', () => {
   assert.equal(tasks[1].sport_type, 'running');
 });
 
-test('adjusts a task at most twice per week and creates a recovery task', () => {
+test('adjusts a task at most 68 times per week and creates recovery tasks', () => {
   let state = createSeedState();
   state.user.onboarded = true;
-  state.tasks = createTasksForUser(state.user);
+  state.tasks = Array.from({ length: 69 }, (_, index) => ({
+    task_id: `adjustable_${index}`,
+    user_id: state.user.user_id,
+    team_id: '',
+    task_type: 'basic',
+    title: `可调整任务 ${index + 1}`,
+    description: '用于验证调整次数上限。',
+    sport_type: 'walking',
+    target_value: 20,
+    target_unit: '分钟',
+    exp_reward: 30,
+    status: 'not_started',
+    adjusted: false,
+    created_at: new Date().toISOString(),
+    expired_at: ''
+  }));
 
-  state = adjustTask(state, state.tasks[0].task_id, '考试/作业');
-  state = adjustTask(state, state.tasks[1].task_id, '天气原因');
+  for (let index = 0; index < 68; index += 1) {
+    state = adjustTask(state, `adjustable_${index}`, '考试/作业');
+  }
 
-  assert.equal(state.adjustments.current_week_count, 2);
-  assert.equal(state.tasks.filter((task) => task.task_type === 'recovery').length, 2);
-  assert.throws(() => adjustTask(state, state.tasks[2].task_id, '其他'), /每周最多/);
+  assert.equal(state.adjustments.current_week_count, 68);
+  assert.equal(state.tasks.filter((task) => task.task_type === 'recovery').length, 68);
+  assert.throws(() => adjustTask(state, 'adjustable_68', '其他'), /68/);
 });
 
 test('completes check-in, adds exp, unlocks first title, and updates team progress', () => {

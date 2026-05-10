@@ -156,7 +156,7 @@ function normalizeAdjustmentCounter(state) {
 function adjustTask(state, taskId, reason) {
   const next = normalizeAdjustmentCounter(state);
   if (next.adjustments.current_week_count >= next.adjustments.max_per_week) {
-    throw new Error('每周最多调整 2 次任务');
+    throw new Error(`每周最多调整 ${next.adjustments.max_per_week} 次任务`);
   }
 
   const task = next.tasks.find((item) => item.task_id === taskId);

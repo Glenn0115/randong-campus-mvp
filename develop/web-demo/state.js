@@ -65,7 +65,7 @@
       titles: clone(titleSeeds),
       adjustments: {
         used: 0,
-        max: 2
+        max: 68
       }
     };
   }
@@ -183,7 +183,7 @@
   function adjustTask(state, taskId, reason) {
     const next = clone(state);
     if (next.adjustments.used >= next.adjustments.max) {
-      throw new Error('每周最多调整 2 次任务');
+      throw new Error(`每周最多调整 ${next.adjustments.max} 次任务`);
     }
     const task = next.tasks.find((item) => item.id === taskId);
     if (!task) throw new Error('任务不存在');

@@ -22,7 +22,8 @@ const GROUPS = [
 Page({
   data: {
     groups: [],
-    remainingAdjustments: 2
+    remainingAdjustments: 68,
+    maxAdjustments: 68
   },
 
   onShow() {
@@ -47,7 +48,8 @@ Page({
 
     this.setData({
       groups,
-      remainingAdjustments: remaining
+      remainingAdjustments: remaining,
+      maxAdjustments: state.adjustments.max_per_week
     });
   },
 

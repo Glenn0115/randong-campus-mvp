@@ -96,7 +96,7 @@ function createSeedState() {
     adjustments: {
       week_key: '',
       current_week_count: 0,
-      max_per_week: 2
+      max_per_week: 68
     },
     seedRankings: {
       users: [

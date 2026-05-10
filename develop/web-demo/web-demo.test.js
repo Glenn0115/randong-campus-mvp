@@ -58,7 +58,7 @@ test('completing a task increases exp, streak, and unlocks first title', () => {
   assert.equal(state.titles.find((title) => title.id === 'first').unlocked, true);
 });
 
-test('adjusting tasks is limited to twice per week', () => {
+test('adjusting tasks is limited to 68 times per week', () => {
   let state = completeOnboarding(createInitialState(), {
     roleName: '操场新星',
     goal: '放松',
@@ -66,13 +66,25 @@ test('adjusting tasks is limited to twice per week', () => {
     frequency: '1-2 次',
     fitness: '新手'
   });
+  state.tasks = Array.from({ length: 69 }, (_, index) => ({
+    id: `adjustable-${index}`,
+    type: '基础任务',
+    title: `可调整任务 ${index + 1}`,
+    description: '用于验证调整次数上限。',
+    sport: '散步',
+    value: 20,
+    unit: '分钟',
+    exp: 30,
+    status: 'not-started'
+  }));
 
-  state = adjustTask(state, state.tasks[0].id, '考试/作业');
-  state = adjustTask(state, state.tasks[1].id, '天气原因');
+  for (let index = 0; index < 68; index += 1) {
+    state = adjustTask(state, `adjustable-${index}`, '考试/作业');
+  }
 
-  assert.equal(state.adjustments.used, 2);
-  assert.equal(state.tasks.filter((task) => task.type === '恢复任务').length, 2);
-  assert.throws(() => adjustTask(state, state.tasks[2].id, '其他'), /每周最多/);
+  assert.equal(state.adjustments.used, 68);
+  assert.equal(state.tasks.filter((task) => task.type === '恢复任务').length, 68);
+  assert.throws(() => adjustTask(state, 'adjustable-68', '其他'), /68/);
 });
 
 test('team invite flow updates team and invite state', () => {

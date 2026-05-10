@@ -3,7 +3,7 @@
     <view class="row">
       <view>
         <view class="title">今日任务</view>
-        <view class="muted">剩余调整次数 {{remainingAdjustments}} / 2</view>
+        <view class="muted">剩余调整次数 {{remainingAdjustments}} / {{maxAdjustments}}</view>
       </view>
       <text class="badge">自动保连续</text>
     </view>
