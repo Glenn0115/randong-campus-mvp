@@ -70,6 +70,16 @@
     };
   }
 
+  function normalizeState(state) {
+    const next = clone(state || createInitialState());
+    if (!next.adjustments) {
+      next.adjustments = { used: 0, max: 68 };
+    }
+    next.adjustments.used = Number(next.adjustments.used || 0);
+    next.adjustments.max = 68;
+    return next;
+  }
+
   function createDailyTasks(profile) {
     const preferred = profile.sports[0] || '散步';
     const easy = profile.fitness === '新手';
@@ -321,7 +331,9 @@
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return createInitialState();
     try {
-      return JSON.parse(raw);
+      const migrated = normalizeState(JSON.parse(raw));
+      saveState(migrated);
+      return migrated;
     } catch (error) {
       return createInitialState();
     }

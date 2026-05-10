@@ -119,3 +119,28 @@ test('anonymous leaderboard hides current user name', () => {
 
   assert.equal(leaderboards.persistence.some((entry) => entry.name === '匿名用户'), true);
 });
+
+test('loadState migrates old browser storage adjustment max from 2 to 68', () => {
+  const previousStorage = global.localStorage;
+  const oldState = createInitialState();
+  oldState.adjustments = { used: 1, max: 2 };
+  let savedValue = '';
+  global.localStorage = {
+    getItem() {
+      return JSON.stringify(oldState);
+    },
+    setItem(_key, value) {
+      savedValue = value;
+    }
+  };
+
+  delete require.cache[require.resolve('./state')];
+  const { loadState } = require('./state');
+  const loaded = loadState();
+
+  assert.equal(loaded.adjustments.used, 1);
+  assert.equal(loaded.adjustments.max, 68);
+  assert.equal(JSON.parse(savedValue).adjustments.max, 68);
+
+  global.localStorage = previousStorage;
+});

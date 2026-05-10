@@ -3,6 +3,24 @@ const { createSeedState } = require('./mockData');
 const STORAGE_KEY = 'randong_campus_state_v1';
 let memoryState = null;
 
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function normalizeState(state) {
+  const next = clone(state || createSeedState());
+  if (!next.adjustments) {
+    next.adjustments = {
+      week_key: '',
+      current_week_count: 0,
+      max_per_week: 68
+    };
+  }
+  next.adjustments.current_week_count = Number(next.adjustments.current_week_count || 0);
+  next.adjustments.max_per_week = 68;
+  return next;
+}
+
 function hasWxStorage() {
   return typeof wx !== 'undefined' && wx && typeof wx.getStorageSync === 'function';
 }
@@ -31,7 +49,9 @@ function ensureSeedData() {
 
 function getState() {
   ensureSeedData();
-  return getRawState();
+  const state = normalizeState(getRawState());
+  saveRawState(state);
+  return state;
 }
 
 function setState(nextState) {
